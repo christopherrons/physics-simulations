@@ -17,7 +17,7 @@ add_executable(physics_simulations
         code/header/simulation/SimulationStateMachine.h
         code/src/simulation/SimulationStateMachine.cpp
         code/src/simulation/SimulationConfig.cpp
-        code/header/simulation/SimulationConfig.h)
+        code/header/simulation/SimulationConfig.h code/src/simulation/PhysicsObjectDetails.cpp code/header/simulation/PhysicsObjectDetails.h)
 
 target_link_libraries(physics_simulations
         -lsfml-graphics

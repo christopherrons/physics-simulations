@@ -8,9 +8,9 @@
 
 class SimulationConfig {
 public:
-    explicit SimulationConfig(int nrOfObjects, int frameRate);
+    explicit SimulationConfig(int nrOfObjects, int frameRate, int xBoundary, int yBoundary);
 
-    int getNrOfObjects() const;
+    [[nodiscard]] int getNrOfObjects() const;
 
     void setNrOfOjects();
 
@@ -18,9 +18,15 @@ public:
 
     void setFrameRate();
 
+    [[nodiscard]]  int getXBoundary() const;
+
+    [[nodiscard]]  int getYBoundary() const;
+
 private:
     int nrOfObjects;
     int frameRate;
+    int xBoundary;
+    int yBoundary;
 };
 
 

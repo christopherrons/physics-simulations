@@ -11,6 +11,7 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics.hpp>
+#include "../simulation/PhysicsObjectDetails.h"
 
 class WindowHandler {
 public:
@@ -23,7 +24,7 @@ private:
 public:
     sf::RenderWindow window;
 
-    void draw(std::vector<sf::CircleShape> const &objects);
+    void draw(std::vector<PhysicsObjectDetails> &objects);
 
     void drawBackground();
 
@@ -32,6 +33,8 @@ public:
     double getWindowHeight();
 
     double getWindowWidth();
+
+    void takeScreenShot(int iteration);
 };
 
 

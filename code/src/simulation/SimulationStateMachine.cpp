@@ -8,11 +8,14 @@
 
 SimulationStateMachine::SimulationStateMachine(SimulationConfig simulationConfig) :
         simulationConfig(simulationConfig) {
+    initObjects();
 }
 
 void SimulationStateMachine::initObjects() {
-    for (int i = 0; i < this->simulationConfig.getNrOfObjects(); i++) {
-        objects.push_back(ObjectUtil::createCircle());
+    for (int i = 0; i < simulationConfig.getNrOfObjects(); i++) {
+        objects.push_back(
+                ObjectUtil::createObject(i, 1.0, simulationConfig.getXBoundary(), simulationConfig.getYBoundary())
+        );
     }
 }
 
@@ -24,7 +27,7 @@ void SimulationStateMachine::restartSimulation() {
     initObjects();
 }
 
-std::vector<sf::CircleShape> SimulationStateMachine::getObjects() {
-    return this->objects;
+std::vector<PhysicsObjectDetails> &SimulationStateMachine::getObjects() {
+    return objects;
 }
 

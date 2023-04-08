@@ -85,6 +85,12 @@ build CMakeFiles/physics_simulations.dir/code/src/simulation/SimulationConfig.cp
   OBJECT_DIR = CMakeFiles/physics_simulations.dir
   OBJECT_FILE_DIR = CMakeFiles/physics_simulations.dir/code/src/simulation
 
+build CMakeFiles/physics_simulations.dir/code/src/simulation/PhysicsObject.cpp.o: CXX_COMPILER__physics_simulations_Debug /home/christopher/dev/physics-simulations/code/src/simulation/PhysicsObject.cpp || cmake_object_order_depends_target_physics_simulations
+  DEP_FILE = CMakeFiles/physics_simulations.dir/code/src/simulation/PhysicsObject.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++17
+  OBJECT_DIR = CMakeFiles/physics_simulations.dir
+  OBJECT_FILE_DIR = CMakeFiles/physics_simulations.dir/code/src/simulation
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target physics_simulations
@@ -93,7 +99,7 @@ build CMakeFiles/physics_simulations.dir/code/src/simulation/SimulationConfig.cp
 #############################################
 # Link the executable /home/christopher/dev/physics-simulations/bin/physics_simulations
 
-build /home/christopher/dev/physics-simulations/bin/physics_simulations: CXX_EXECUTABLE_LINKER__physics_simulations_Debug CMakeFiles/physics_simulations.dir/code/main.cpp.o CMakeFiles/physics_simulations.dir/code/src/gui/WindowHandler.cpp.o CMakeFiles/physics_simulations.dir/code/src/utils/ObjectUtil.cpp.o CMakeFiles/physics_simulations.dir/code/src/utils/MathUtils.cpp.o CMakeFiles/physics_simulations.dir/code/src/simulation/SimulationStateMachine.cpp.o CMakeFiles/physics_simulations.dir/code/src/simulation/SimulationConfig.cpp.o
+build /home/christopher/dev/physics-simulations/bin/physics_simulations: CXX_EXECUTABLE_LINKER__physics_simulations_Debug CMakeFiles/physics_simulations.dir/code/main.cpp.o CMakeFiles/physics_simulations.dir/code/src/gui/WindowHandler.cpp.o CMakeFiles/physics_simulations.dir/code/src/utils/ObjectUtil.cpp.o CMakeFiles/physics_simulations.dir/code/src/utils/MathUtils.cpp.o CMakeFiles/physics_simulations.dir/code/src/simulation/SimulationStateMachine.cpp.o CMakeFiles/physics_simulations.dir/code/src/simulation/SimulationConfig.cpp.o CMakeFiles/physics_simulations.dir/code/src/simulation/PhysicsObject.cpp.o
   FLAGS = -g
   LINK_LIBRARIES = -lsfml-graphics  -lsfml-window  -lsfml-system
   OBJECT_DIR = CMakeFiles/physics_simulations.dir

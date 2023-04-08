@@ -4,10 +4,19 @@
 
 #include "../../header/utils/ObjectUtil.h"
 
+PhysicsObjectDetails ObjectUtil::createObject(int id, double density, int xBoundary, int yBoundary) {
+    sf::CircleShape circle = createCircle(xBoundary, yBoundary);
+    return PhysicsObjectDetails(id, circle, density);
+}
 
-sf::CircleShape ObjectUtil::createCircle() {
+sf::CircleShape ObjectUtil::createCircle(int xBoundary, int yBoundary) {
     sf::CircleShape circle;
-    circle.setRadius(MathUtils::getUniformRandomNumber(1, 10));
-    circle.setPosition(MathUtils::getUniformRandomNumber(0, 1920), MathUtils::getUniformRandomNumber(0, 1080));
+    double radius = MathUtils::getUniformRandomNumber(3, 10);
+    circle.setRadius(radius);
+    circle.setPosition(MathUtils::getUniformRandomNumber(0, xBoundary - radius),
+                       MathUtils::getUniformRandomNumber(0, yBoundary - radius)
+    );
     return circle;
 }
+
+

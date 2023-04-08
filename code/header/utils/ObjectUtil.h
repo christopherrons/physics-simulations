@@ -7,10 +7,13 @@
 
 #include <SFML/Graphics.hpp>
 #include "../../header/utils/MathUtils.h"
+#include "../simulation/PhysicsObjectDetails.h"
 
 class ObjectUtil {
 public:
-    static sf::CircleShape createCircle();
+    static sf::CircleShape createCircle(int xBoundary, int yBoundary);
+
+    static PhysicsObjectDetails createObject(int id, double density, int xBoundary, int yBoundary);
 };
 
 

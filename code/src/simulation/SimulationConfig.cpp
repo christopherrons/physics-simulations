@@ -4,15 +4,25 @@
 
 #include "../../header/simulation/SimulationConfig.h"
 
-SimulationConfig::SimulationConfig(int nrOfObjects, int frameRate) :
+SimulationConfig::SimulationConfig(int nrOfObjects, int frameRate, int xBoundary, int yBoundary) :
         nrOfObjects(nrOfObjects),
-        frameRate(frameRate) {
+        frameRate(frameRate),
+        xBoundary(xBoundary),
+        yBoundary(yBoundary) {
 }
 
 int SimulationConfig::getNrOfObjects() const {
-    return this->nrOfObjects;
+    return nrOfObjects;
 }
 
 int SimulationConfig::getFrameRate() const {
-    return this->frameRate;
+    return frameRate;
+}
+
+int SimulationConfig::getXBoundary() const {
+    return xBoundary;
+}
+
+int SimulationConfig::getYBoundary() const {
+    return yBoundary;
 }

@@ -7,6 +7,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "SimulationConfig.h"
+#include "PhysicsObjectDetails.h"
 
 class SimulationStateMachine {
 public:
@@ -16,14 +17,14 @@ public:
 
     void restartSimulation();
 
+    std::vector<PhysicsObjectDetails>& getObjects();
+
+private:
     void initObjects();
-
-    std::vector<sf::CircleShape> getObjects();
-
 
 private:
     SimulationConfig simulationConfig;
-    std::vector<sf::CircleShape> objects;
+    std::vector<PhysicsObjectDetails> objects;
 };
 
 
