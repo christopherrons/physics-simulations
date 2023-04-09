@@ -23,6 +23,7 @@ void PhysicsEngine::updateState(std::vector<RigidCircleBody> &bodies) {
         body.updatePositionX(updatedPositionX);
         body.updatePositionY(updatedPositionY);
     }
+
     for (auto &bodyA: bodies) {
         for (auto &bodyB: bodies) {
             if (bodyA.getObjectId() == bodyB.getObjectId()) {
@@ -35,10 +36,6 @@ void PhysicsEngine::updateState(std::vector<RigidCircleBody> &bodies) {
     for (auto &body: bodies) {
         handleWallCollision(body);
     }
-}
-
-void PhysicsEngine::handleCollisions(RigidCircleBody &body) {
-    handleWallCollision(body);
 }
 
 void PhysicsEngine::handleBodyCollisions(RigidCircleBody &bodyA, RigidCircleBody &bodyB) {

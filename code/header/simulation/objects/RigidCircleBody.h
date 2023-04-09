@@ -26,7 +26,7 @@ public:
 
     void updateVelocityX(double x);
 
-    void updateVelocityY(double x);
+    void updateVelocityY(double y);
 
     double getPositionX();
 

@@ -11,8 +11,8 @@
 
 int main() {
     std::string recordOption = "temp";
-    std::cout << "\nType record if you wish to record else no: ";
-    std::cin >> recordOption;
+  //  std::cout << "\nType record if you wish to record else no: ";
+   // std::cin >> recordOption;
 
     int windowsWidth = 1600;
     int windowsHeight = 700;
@@ -22,7 +22,7 @@ int main() {
     sf::Vector2i CurrentMousePosition;
     sf::Clock clock;
     sf::Time timeSinceLastUpdate;
-    SimulationConfig simulationConfig(150, 60, border, border, windowsWidth - border, windowsHeight - border, 50);
+    SimulationConfig simulationConfig(15, 60, border, border, windowsWidth - border, windowsHeight - border, 50);
     PhysicsSceneHandler sceneHandler(simulationConfig);
 
     int iteration = 0;
