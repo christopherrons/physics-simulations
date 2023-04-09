@@ -7,29 +7,28 @@
 #include <iostream>
 #include "header/gui/WindowHandler.h"
 #include "header/utils/ObjectUtil.h"
-#include "header/simulation//SimulationStateMachine.h"
+#include "header/simulation//PhysicsSceneHandler.h"
 
 int main() {
     std::string recordOption = "temp";
     // std::cout << "\nType record if you wish to record else no: ";
     //   std::cin >> recordOption;
 
-    WindowHandler windowHandler;
-    windowHandler.drawBackground();
+    WindowHandler windowHandler(1920, 1080);
 
     sf::Vector2i CurrentMousePosition;
     sf::Clock clock;
     sf::Time timeSinceLastUpdate;
     SimulationConfig simulationConfig(10, 60, windowHandler.getWindowWidth(), windowHandler.getWindowHeight());
-    SimulationStateMachine simulationStateMachine(simulationConfig);
+    PhysicsSceneHandler sceneHandler(simulationConfig);
 
     int iteration = 0;
     while (true) {
         sf::Event event{};
-        simulationStateMachine.iterateSimulation();
+        sceneHandler.updateScene();
         timeSinceLastUpdate += clock.restart();
         if (timeSinceLastUpdate.asSeconds() >= 1.0 / simulationConfig.getFrameRate()) {
-            windowHandler.draw(simulationStateMachine.getObjects());
+            windowHandler.draw(sceneHandler.getWalls(), sceneHandler.getBodies());
             if (recordOption == "record") {
                 windowHandler.takeScreenShot(iteration++);
             }

@@ -73,8 +73,8 @@ build CMakeFiles/physics_simulations.dir/code/src/utils/MathUtils.cpp.o: CXX_COM
   OBJECT_DIR = CMakeFiles/physics_simulations.dir
   OBJECT_FILE_DIR = CMakeFiles/physics_simulations.dir/code/src/utils
 
-build CMakeFiles/physics_simulations.dir/code/src/simulation/SimulationStateMachine.cpp.o: CXX_COMPILER__physics_simulations_Debug /home/christopher/dev/physics-simulations/code/src/simulation/SimulationStateMachine.cpp || cmake_object_order_depends_target_physics_simulations
-  DEP_FILE = CMakeFiles/physics_simulations.dir/code/src/simulation/SimulationStateMachine.cpp.o.d
+build CMakeFiles/physics_simulations.dir/code/src/simulation/PhysicsSceneHandler.cpp.o: CXX_COMPILER__physics_simulations_Debug /home/christopher/dev/physics-simulations/code/src/simulation/PhysicsSceneHandler.cpp || cmake_object_order_depends_target_physics_simulations
+  DEP_FILE = CMakeFiles/physics_simulations.dir/code/src/simulation/PhysicsSceneHandler.cpp.o.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu++17
   OBJECT_DIR = CMakeFiles/physics_simulations.dir
   OBJECT_FILE_DIR = CMakeFiles/physics_simulations.dir/code/src/simulation
@@ -85,11 +85,29 @@ build CMakeFiles/physics_simulations.dir/code/src/simulation/SimulationConfig.cp
   OBJECT_DIR = CMakeFiles/physics_simulations.dir
   OBJECT_FILE_DIR = CMakeFiles/physics_simulations.dir/code/src/simulation
 
-build CMakeFiles/physics_simulations.dir/code/src/simulation/PhysicsObject.cpp.o: CXX_COMPILER__physics_simulations_Debug /home/christopher/dev/physics-simulations/code/src/simulation/PhysicsObject.cpp || cmake_object_order_depends_target_physics_simulations
-  DEP_FILE = CMakeFiles/physics_simulations.dir/code/src/simulation/PhysicsObject.cpp.o.d
+build CMakeFiles/physics_simulations.dir/code/src/simulation/objects/RigidRectangleBody.cpp.o: CXX_COMPILER__physics_simulations_Debug /home/christopher/dev/physics-simulations/code/src/simulation/objects/RigidRectangleBody.cpp || cmake_object_order_depends_target_physics_simulations
+  DEP_FILE = CMakeFiles/physics_simulations.dir/code/src/simulation/objects/RigidRectangleBody.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++17
+  OBJECT_DIR = CMakeFiles/physics_simulations.dir
+  OBJECT_FILE_DIR = CMakeFiles/physics_simulations.dir/code/src/simulation/objects
+
+build CMakeFiles/physics_simulations.dir/code/src/simulation/objects/RigidCircleBody.cpp.o: CXX_COMPILER__physics_simulations_Debug /home/christopher/dev/physics-simulations/code/src/simulation/objects/RigidCircleBody.cpp || cmake_object_order_depends_target_physics_simulations
+  DEP_FILE = CMakeFiles/physics_simulations.dir/code/src/simulation/objects/RigidCircleBody.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++17
+  OBJECT_DIR = CMakeFiles/physics_simulations.dir
+  OBJECT_FILE_DIR = CMakeFiles/physics_simulations.dir/code/src/simulation/objects
+
+build CMakeFiles/physics_simulations.dir/code/src/simulation/PhysicsEngine.cpp.o: CXX_COMPILER__physics_simulations_Debug /home/christopher/dev/physics-simulations/code/src/simulation/PhysicsEngine.cpp || cmake_object_order_depends_target_physics_simulations
+  DEP_FILE = CMakeFiles/physics_simulations.dir/code/src/simulation/PhysicsEngine.cpp.o.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu++17
   OBJECT_DIR = CMakeFiles/physics_simulations.dir
   OBJECT_FILE_DIR = CMakeFiles/physics_simulations.dir/code/src/simulation
+
+build CMakeFiles/physics_simulations.dir/code/src/math/Vector2D.cpp.o: CXX_COMPILER__physics_simulations_Debug /home/christopher/dev/physics-simulations/code/src/math/Vector2D.cpp || cmake_object_order_depends_target_physics_simulations
+  DEP_FILE = CMakeFiles/physics_simulations.dir/code/src/math/Vector2D.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++17
+  OBJECT_DIR = CMakeFiles/physics_simulations.dir
+  OBJECT_FILE_DIR = CMakeFiles/physics_simulations.dir/code/src/math
 
 
 # =============================================================================
@@ -99,7 +117,7 @@ build CMakeFiles/physics_simulations.dir/code/src/simulation/PhysicsObject.cpp.o
 #############################################
 # Link the executable /home/christopher/dev/physics-simulations/bin/physics_simulations
 
-build /home/christopher/dev/physics-simulations/bin/physics_simulations: CXX_EXECUTABLE_LINKER__physics_simulations_Debug CMakeFiles/physics_simulations.dir/code/main.cpp.o CMakeFiles/physics_simulations.dir/code/src/gui/WindowHandler.cpp.o CMakeFiles/physics_simulations.dir/code/src/utils/ObjectUtil.cpp.o CMakeFiles/physics_simulations.dir/code/src/utils/MathUtils.cpp.o CMakeFiles/physics_simulations.dir/code/src/simulation/SimulationStateMachine.cpp.o CMakeFiles/physics_simulations.dir/code/src/simulation/SimulationConfig.cpp.o CMakeFiles/physics_simulations.dir/code/src/simulation/PhysicsObject.cpp.o
+build /home/christopher/dev/physics-simulations/bin/physics_simulations: CXX_EXECUTABLE_LINKER__physics_simulations_Debug CMakeFiles/physics_simulations.dir/code/main.cpp.o CMakeFiles/physics_simulations.dir/code/src/gui/WindowHandler.cpp.o CMakeFiles/physics_simulations.dir/code/src/utils/ObjectUtil.cpp.o CMakeFiles/physics_simulations.dir/code/src/utils/MathUtils.cpp.o CMakeFiles/physics_simulations.dir/code/src/simulation/PhysicsSceneHandler.cpp.o CMakeFiles/physics_simulations.dir/code/src/simulation/SimulationConfig.cpp.o CMakeFiles/physics_simulations.dir/code/src/simulation/objects/RigidRectangleBody.cpp.o CMakeFiles/physics_simulations.dir/code/src/simulation/objects/RigidCircleBody.cpp.o CMakeFiles/physics_simulations.dir/code/src/simulation/PhysicsEngine.cpp.o CMakeFiles/physics_simulations.dir/code/src/math/Vector2D.cpp.o
   FLAGS = -g
   LINK_LIBRARIES = -lsfml-graphics  -lsfml-window  -lsfml-system
   OBJECT_DIR = CMakeFiles/physics_simulations.dir

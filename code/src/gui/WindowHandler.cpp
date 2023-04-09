@@ -4,18 +4,24 @@
 
 #include <iostream>
 #include "../../header/gui/WindowHandler.h"
-#include "../../header/simulation/PhysicsObjectDetails.h"
 
-WindowHandler::WindowHandler()
-        : window(sf::VideoMode(1920.0, 1080.0), "Physics Simulation", sf::Style::Default),
+
+WindowHandler::WindowHandler(int width, int height)
+        : window(sf::VideoMode(width, height), "Physics Simulation", sf::Style::Fullscreen),
           backgroundSprite(sf::Sprite()) {
 }
 
-void WindowHandler::draw(std::vector<PhysicsObjectDetails> &objects) {
+
+void WindowHandler::draw(std::vector<RigidRectangleBody> &walls, std::vector<RigidCircleBody> &bodies) {
     this->window.clear();
     this->drawBackground();
-    for (auto &object: objects) {
-        this->window.draw(object.getObject());
+
+    for (auto &wall: walls) {
+        this->window.draw(wall.getShape());
+    }
+
+    for (auto &body: bodies) {
+        this->window.draw(body.getShape());
     }
 
     this->window.display();

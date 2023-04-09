@@ -11,20 +11,21 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics.hpp>
-#include "../simulation/PhysicsObjectDetails.h"
+#include "../simulation/objects/RigidBody.h"
+#include "../simulation/objects/RigidRectangleBody.h"
+#include "../simulation/objects/RigidCircleBody.h"
 
 class WindowHandler {
 public:
-    WindowHandler();
+    WindowHandler(int width, int height);
 
 private:
     sf::Sprite backgroundSprite;
-    std::vector<sf::RectangleShape> pixels;
 
 public:
     sf::RenderWindow window;
 
-    void draw(std::vector<PhysicsObjectDetails> &objects);
+    void draw(std::vector<RigidRectangleBody> &walls, std::vector<RigidCircleBody> &bodies);
 
     void drawBackground();
 

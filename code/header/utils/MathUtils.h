@@ -11,13 +11,13 @@ class MathUtils {
 public:
     static double getUniformRandomNumber(double min, double max);
 
-    static double calculateAreaOfCircle(double radius) {
-        return 2 * M_PI * radius * radius;
-    }
+    static double calculateAreaOfCircle(double radius);
 
-    static double calculateVolumeOfSphere(double radius) {
-        return 4.0 / 3 * M_PI * radius * radius * radius;
-    }
+    static double calculateVolumeOfSphere(double radius);
+
+    static double calculateAreaOfRectangle(double width, double height);
+
+    static double calculateVolumeOfRectangle(double width, double height, double depth);
 };
 
 
