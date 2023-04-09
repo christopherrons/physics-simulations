@@ -15,3 +15,5 @@ The simulation is built using Cmake and can be built and executed using the buil
 
 If the application has been run in recording mode, run the createRecording.sh script:
 `./createRecording.sh` to create the mp4.
+
+![ezgif com-optimize](https://user-images.githubusercontent.com/45934764/230801269-49c0a6f2-50a2-49ff-96bc-18e07c5c139b.gif)
