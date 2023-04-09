@@ -11,28 +11,37 @@
 
 int main() {
     std::string recordOption = "temp";
-    // std::cout << "\nType record if you wish to record else no: ";
-    //   std::cin >> recordOption;
+    std::cout << "\nType record if you wish to record else no: ";
+    std::cin >> recordOption;
 
-    WindowHandler windowHandler(1920, 1080);
+    int windowsWidth = 1600;
+    int windowsHeight = 700;
+    int border = 50;
+    WindowHandler windowHandler(windowsWidth, windowsHeight, border);
 
     sf::Vector2i CurrentMousePosition;
     sf::Clock clock;
     sf::Time timeSinceLastUpdate;
-    SimulationConfig simulationConfig(10, 60, windowHandler.getWindowWidth(), windowHandler.getWindowHeight());
+    SimulationConfig simulationConfig(150, 60, border, border, windowsWidth - border, windowsHeight - border, 50);
     PhysicsSceneHandler sceneHandler(simulationConfig);
 
     int iteration = 0;
+    double updatesPerSecond = 1.0 / simulationConfig.getFrameRate();
     while (true) {
         sf::Event event{};
-        sceneHandler.updateScene();
         timeSinceLastUpdate += clock.restart();
-        if (timeSinceLastUpdate.asSeconds() >= 1.0 / simulationConfig.getFrameRate()) {
-            windowHandler.draw(sceneHandler.getWalls(), sceneHandler.getBodies());
+        if (timeSinceLastUpdate.asSeconds() > updatesPerSecond) {
+            sceneHandler.updateScene();
+            windowHandler.draw(sceneHandler.getBodies(), timeSinceLastUpdate.asSeconds());
+
             if (recordOption == "record") {
                 windowHandler.takeScreenShot(iteration++);
             }
+
+            timeSinceLastUpdate = sf::Time::Zero;
+
         }
+
         while (windowHandler.window.pollEvent(event)) {
 
             if (event.type == sf::Event::Closed) {
@@ -44,5 +53,6 @@ int main() {
             }
         }
     }
+
     return 0;
 }

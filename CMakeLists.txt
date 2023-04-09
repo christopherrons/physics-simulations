@@ -17,7 +17,7 @@ add_executable(physics_simulations
         code/header/simulation/PhysicsSceneHandler.h
         code/src/simulation/PhysicsSceneHandler.cpp
         code/src/simulation/SimulationConfig.cpp
-        code/header/simulation/SimulationConfig.h code/header/simulation/objects/RigidBody.h code/src/simulation/objects/RigidRectangleBody.cpp code/header/simulation/objects/RigidRectangleBody.h code/src/simulation/objects/RigidCircleBody.cpp code/header/simulation/objects/RigidCircleBody.h code/src/simulation/PhysicsEngine.cpp code/header/simulation/PhysicsEngine.h code/src/math/Vector2D.cpp code/src/math/Vector2D.h)
+        code/header/simulation/SimulationConfig.h code/header/simulation/objects/RigidBody.h code/src/simulation/objects/RigidRectangleBody.cpp code/header/simulation/objects/RigidRectangleBody.h code/src/simulation/objects/RigidCircleBody.cpp code/header/simulation/objects/RigidCircleBody.h code/src/simulation/PhysicsEngine.cpp code/header/simulation/PhysicsEngine.h code/src/math/Vector2D.cpp code/header/math/Vector2D.h)
 
 target_link_libraries(physics_simulations
         -lsfml-graphics

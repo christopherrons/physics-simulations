@@ -18,6 +18,10 @@ public:
     static double calculateAreaOfRectangle(double width, double height);
 
     static double calculateVolumeOfRectangle(double width, double height, double depth);
+
+    static double scaleValue(double value, double minValue, double maxValue, double scaleMin, double scaleMax);
+
+    static double linearInterpolation(double x, double x0, double x1, double y0, double y1);
 };
 
 

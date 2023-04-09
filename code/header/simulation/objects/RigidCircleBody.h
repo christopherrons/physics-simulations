@@ -7,32 +7,53 @@
 
 
 #include <SFML/Graphics/CircleShape.hpp>
-#include "../../../src/math/Vector2D.h"
+#include "../../math/Vector2D.h"
 
 class RigidCircleBody {
 public:
-    explicit RigidCircleBody(int objectId, double density, Vector2D initialVelocity, Vector2D initialPosition,
+    explicit RigidCircleBody(int objectId, double density, double maxVelocity, Vector2D initialAcceleration,
+                             Vector2D initialVelocity,
+                             Vector2D initialPosition,
                              sf::CircleShape circleShape);
 
     int getObjectId() const;
 
     sf::CircleShape &getShape();
 
-    void updatePosition(Vector2D currentPosition);
+    void updatePositionX(double x);
 
-    void updateVelocity(Vector2D currentVelocity);
+    void updatePositionY(double y);
 
-    double getMass();
+    void updateVelocityX(double x);
 
-    Vector2D getPosition();
+    void updateVelocityY(double x);
 
-    Vector2D getVelocity();
+    double getPositionX();
+
+    double getPositionY();
+
+    double getVelocityX();
+
+    double getVelocityY();
+
+    double getMass() const;
+
+    Vector2D getPositionCopy();
+
+    Vector2D getVelocityCopy();
+
+    Vector2D getAccelerationCopy();
+
+    double getRadius();
+
 
 private:
     Vector2D velocity;
     Vector2D position;
+    Vector2D acceleration;
     double mass;
     double density;
+    double maxVelocity;
     int objectId;
     sf::CircleShape circleShape;
 };

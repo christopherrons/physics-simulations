@@ -1,6 +1,6 @@
 # Physics Simulation
 
-An application for running physics simulation.
+An application for running a 2d physics simulation of balls colliding.
 
 # Installation Linux Ubuntu
 

@@ -12,9 +12,10 @@
 
 class ObjectUtil {
 public:
-    static RigidCircleBody createCircle(int objectId, int xBoundary, int yBoundary);
+    static RigidCircleBody createCircle(int objectId, int xMinBoundary, int yMinBoundary, int xMaxBoundary,
+                                        int yMaxBoundary, double maxVelocity);
 
-    //  static PhysicsObjectDetails createObject(int id, double density, int xBoundary, int yBoundary);
+    static sf::Color getColorInterpolated(double velocityAbsolute, double maxVelocity);
 
     static RigidRectangleBody createRectangle(int objetId, float xSize, float ySize, float xPosition, float yPosition);
 };

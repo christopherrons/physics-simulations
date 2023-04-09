@@ -4,17 +4,50 @@
 
 #include <iostream>
 #include "../../header/gui/WindowHandler.h"
+#include "../../header/utils/ObjectUtil.h"
 
 
-WindowHandler::WindowHandler(int width, int height)
-        : window(sf::VideoMode(width, height), "Physics Simulation", sf::Style::Fullscreen),
+WindowHandler::WindowHandler(int width, int height, int border)
+        : window(sf::VideoMode(width, height), "Physics Simulation", sf::Style::Default),
+          textFont(sf::Font()),
+          frameRateText(sf::Text("FPS: ", textFont)),
+          nrOfParticlesText(sf::Text("| # Particles: ", textFont)),
           backgroundSprite(sf::Sprite()) {
+
+    frameRateText.setOutlineThickness(1.f);
+    frameRateText.setFillColor(sf::Color::White);
+    frameRateText.setCharacterSize(20);
+    frameRateText.setPosition(15.f, 15.f);
+    frameRateText.setStyle(sf::Text::Style::Bold);
+
+    nrOfParticlesText.setOutlineThickness(1.f);
+    nrOfParticlesText.setFillColor(sf::Color::White);
+    nrOfParticlesText.setCharacterSize(20);
+    nrOfParticlesText.setPosition(100.f, 15.f);
+    nrOfParticlesText.setStyle(sf::Text::Style::Bold);
+
+    initWalls(width, height, border);
+    loadFont();
 }
 
+void WindowHandler::initWalls(float widthNoBorder, float heightNoBorder, int border) {
+    float width = widthNoBorder - 2 * border;
+    float height = heightNoBorder - 2 * border;
+    float wallThickness = 1.0;
 
-void WindowHandler::draw(std::vector<RigidRectangleBody> &walls, std::vector<RigidCircleBody> &bodies) {
+    walls.push_back(ObjectUtil::createRectangle(walls.size(), wallThickness, height, border, border));
+    walls.push_back(ObjectUtil::createRectangle(walls.size(), wallThickness, height, width + border, border));
+    walls.push_back(ObjectUtil::createRectangle(walls.size(), width, wallThickness, border, border));
+    walls.push_back(ObjectUtil::createRectangle(walls.size(), width, wallThickness, border, height + border));
+}
+
+void WindowHandler::draw(std::vector<RigidCircleBody> &bodies, double frameRate) {
     this->window.clear();
     this->drawBackground();
+    this->frameRateText.setString("FPS: " + std::to_string((int) round(1.0 / frameRate)));
+    this->window.draw(this->frameRateText);
+    this->nrOfParticlesText.setString("| # Particles: " + std::to_string(bodies.size()));
+    this->window.draw(this->nrOfParticlesText);
 
     for (auto &wall: walls) {
         this->window.draw(wall.getShape());
@@ -41,6 +74,12 @@ double WindowHandler::getWindowHeight() {
 
 double WindowHandler::getWindowWidth() {
     return this->window.getSize().x;
+}
+
+void WindowHandler::loadFont() {
+    if (!this->textFont.loadFromFile("../code/resources/fonts/OpenSans-Regular.ttf")) {
+        std::cout << "Failed to load font" << std::endl;
+    }
 }
 
 void WindowHandler::takeScreenShot(int iteration) {

@@ -254,7 +254,7 @@
 		},
 		{
 			"backtrace" : 1,
-			"path" : "code/src/math/Vector2D.h",
+			"path" : "code/header/math/Vector2D.h",
 			"sourceGroupIndex" : 1
 		}
 	],

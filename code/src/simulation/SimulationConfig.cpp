@@ -4,11 +4,16 @@
 
 #include "../../header/simulation/SimulationConfig.h"
 
-SimulationConfig::SimulationConfig(int nrOfObjects, int frameRate, int xBoundary, int yBoundary) :
+SimulationConfig::SimulationConfig(int nrOfObjects, int frameRate, int xMinBoundary, int yMinBoundary, int xMaxBoundary,
+                                   int yMaxBoundary, double maxVelocity) :
         nrOfObjects(nrOfObjects),
         frameRate(frameRate),
-        xBoundary(xBoundary),
-        yBoundary(yBoundary) {
+        deltaTime(1.0 / frameRate),
+        xMinBoundary(xMinBoundary),
+        yMinBoundary(yMinBoundary),
+        xMaxBoundary(xMaxBoundary),
+        yMaxBoundary(yMaxBoundary),
+        maxVelocity(maxVelocity) {
 }
 
 int SimulationConfig::getNrOfObjects() const {
@@ -19,10 +24,26 @@ int SimulationConfig::getFrameRate() const {
     return frameRate;
 }
 
-int SimulationConfig::getXBoundary() const {
-    return xBoundary;
+int SimulationConfig::getXMinBoundary() const {
+    return xMinBoundary;
 }
 
-int SimulationConfig::getYBoundary() const {
-    return yBoundary;
+int SimulationConfig::getYMinBoundary() const {
+    return yMinBoundary;
+}
+
+int SimulationConfig::getXMaxBoundary() const {
+    return xMaxBoundary;
+}
+
+int SimulationConfig::getYMaxBoundary() const {
+    return yMaxBoundary;
+}
+
+double SimulationConfig::getDeltaTime() const {
+    return deltaTime;
+}
+
+double SimulationConfig::getMaxVelocity() const {
+    return maxVelocity;
 }

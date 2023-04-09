@@ -8,7 +8,8 @@
 
 class SimulationConfig {
 public:
-    explicit SimulationConfig(int nrOfObjects, int frameRate, int xBoundary, int yBoundary);
+    explicit SimulationConfig(int nrOfObjects, int frameRate, int xMinBoundary, int yMinBoundary, int xMaxBoundary,
+                              int yMaxBoundary, double maxVelocity);
 
     [[nodiscard]] int getNrOfObjects() const;
 
@@ -16,17 +17,29 @@ public:
 
     int getFrameRate() const;
 
+    double getDeltaTime() const;
+
+    double getMaxVelocity() const;
+
     void setFrameRate();
 
-    [[nodiscard]]  int getXBoundary() const;
+    [[nodiscard]]  int getXMinBoundary() const;
 
-    [[nodiscard]]  int getYBoundary() const;
+    [[nodiscard]]  int getYMinBoundary() const;
+
+    [[nodiscard]]  int getXMaxBoundary() const;
+
+    [[nodiscard]]  int getYMaxBoundary() const;
 
 private:
     int nrOfObjects;
     int frameRate;
-    int xBoundary;
-    int yBoundary;
+    double deltaTime;
+    int xMinBoundary;
+    int yMinBoundary;
+    int xMaxBoundary;
+    int yMaxBoundary;
+    double maxVelocity;
 };
 
 

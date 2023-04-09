@@ -17,15 +17,9 @@
 
 class WindowHandler {
 public:
-    WindowHandler(int width, int height);
+    WindowHandler(int width, int height, int border);
 
-private:
-    sf::Sprite backgroundSprite;
-
-public:
-    sf::RenderWindow window;
-
-    void draw(std::vector<RigidRectangleBody> &walls, std::vector<RigidCircleBody> &bodies);
+    void draw(std::vector<RigidCircleBody> &bodies, double frameRate);
 
     void drawBackground();
 
@@ -35,7 +29,22 @@ public:
 
     double getWindowWidth();
 
+    void loadFont();
+
     void takeScreenShot(int iteration);
+
+private:
+    void initWalls(float width, float height, int border);
+
+public:
+    sf::RenderWindow window;
+
+private:
+    sf::Sprite backgroundSprite;
+    std::vector<RigidRectangleBody> walls;
+    sf::Font textFont;
+    sf::Text frameRateText;
+    sf::Text nrOfParticlesText;
 };
 
 

@@ -12,17 +12,25 @@ public:
 
     double magnitude();
 
-    double x();
+    double getX();
 
-    double y();
+    double getY();
 
-    double dot(Vector2D otherVector);
+    double dot(const Vector2D &otherVector) const;
 
-    Vector2D scalar(double scalar);
+    Vector2D add(const Vector2D &otherVector) const;
+
+    Vector2D subtract(const Vector2D &otherVector) const;
+
+    Vector2D scalar(const double scalar) const;
 
     void setX(double x);
 
     void setY(double y);
+
+private:
+    double x;
+    double y;
 };
 
 

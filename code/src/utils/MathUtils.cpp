@@ -27,3 +27,13 @@ double MathUtils::calculateAreaOfRectangle(double width, double height) {
 double MathUtils::calculateVolumeOfRectangle(double width, double height, double depth) {
     return width * height * depth;
 }
+
+double MathUtils::scaleValue(double value, double minValue, double maxValue, double scaleMin, double scaleMax) {
+    return scaleMin + ((value - minValue) / (maxValue - minValue)) * (scaleMax - scaleMin);
+}
+
+double MathUtils::linearInterpolation(double x, double x0, double x1, double y0, double y1) {
+    double rise = y0 * (x1 - x) + y1 * (x - x0);
+    double run = x1 - x0;
+    return rise / run;
+}

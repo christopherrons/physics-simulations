@@ -10,26 +10,24 @@
 #include "objects/RigidBody.h"
 #include "objects/RigidRectangleBody.h"
 #include "objects/RigidCircleBody.h"
+#include "PhysicsEngine.h"
 
 class PhysicsSceneHandler {
 public:
-    explicit PhysicsSceneHandler(SimulationConfig simulationConfig);
+    explicit PhysicsSceneHandler(SimulationConfig &simulationConfig);
 
     void updateScene();
 
     void restartSimulation();
 
-    std::vector<RigidRectangleBody> &getWalls();
     std::vector<RigidCircleBody> &getBodies();
 
 private:
-    void initWalls();
-
     void initBodies();
 
 private:
-    SimulationConfig simulationConfig;
-    std::vector<RigidRectangleBody> walls;
+    SimulationConfig &simulationConfig;
+    PhysicsEngine physicsEngine;
     std::vector<RigidCircleBody> bodies;
 };
 
