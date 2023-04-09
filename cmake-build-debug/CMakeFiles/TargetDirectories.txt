@@ -1,3 +1,0 @@
-/home/christopher/dev/physics-simulations/cmake-build-debug/CMakeFiles/physics_simulations.dir
-/home/christopher/dev/physics-simulations/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/christopher/dev/physics-simulations/cmake-build-debug/CMakeFiles/rebuild_cache.dir
