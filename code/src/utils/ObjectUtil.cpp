@@ -15,8 +15,8 @@ RigidCircleBody ObjectUtil::createCircle(int objectId, int xMinBoundary, int yMi
     Vector2D initialAcceleration(0, 0);
     Vector2D initialVelocity(MathUtils::getUniformRandomNumber(-maxVelocity, maxVelocity),
                              MathUtils::getUniformRandomNumber(-maxVelocity, maxVelocity));
-    Vector2D initialPosition(MathUtils::getUniformRandomNumber(xMinBoundary + radius, xMaxBoundary - radius),
-                             MathUtils::getUniformRandomNumber(yMinBoundary + radius, yMaxBoundary - radius));
+    Vector2D initialPosition(MathUtils::getUniformRandomNumber(xMinBoundary + radius, xMaxBoundary - radius * 2),
+                             MathUtils::getUniformRandomNumber(yMinBoundary + radius, yMaxBoundary - radius * 2));
 
     return RigidCircleBody(objectId, 1.0, maxVelocity, initialAcceleration, initialVelocity, initialPosition,
                            circleShape);

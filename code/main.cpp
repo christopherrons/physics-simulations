@@ -14,15 +14,15 @@ int main() {
   //  std::cout << "\nType record if you wish to record else no: ";
    // std::cin >> recordOption;
 
-    int windowsWidth = 1600;
-    int windowsHeight = 700;
+    int windowsWidth = 600;
+    int windowsHeight = 600;
     int border = 50;
     WindowHandler windowHandler(windowsWidth, windowsHeight, border);
 
     sf::Vector2i CurrentMousePosition;
     sf::Clock clock;
     sf::Time timeSinceLastUpdate;
-    SimulationConfig simulationConfig(15, 60, border, border, windowsWidth - border, windowsHeight - border, 50);
+    SimulationConfig simulationConfig(100, 60, border, border, windowsWidth - border, windowsHeight - border, 1);
     PhysicsSceneHandler sceneHandler(simulationConfig);
 
     int iteration = 0;
@@ -30,8 +30,8 @@ int main() {
     while (true) {
         sf::Event event{};
         timeSinceLastUpdate += clock.restart();
+        sceneHandler.updateScene();
         if (timeSinceLastUpdate.asSeconds() > updatesPerSecond) {
-            sceneHandler.updateScene();
             windowHandler.draw(sceneHandler.getBodies(), timeSinceLastUpdate.asSeconds());
 
             if (recordOption == "record") {

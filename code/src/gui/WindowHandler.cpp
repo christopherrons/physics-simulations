@@ -39,6 +39,26 @@ void WindowHandler::initWalls(float widthNoBorder, float heightNoBorder, int bor
     walls.push_back(ObjectUtil::createRectangle(walls.size(), wallThickness, height, width + border, border));
     walls.push_back(ObjectUtil::createRectangle(walls.size(), width, wallThickness, border, border));
     walls.push_back(ObjectUtil::createRectangle(walls.size(), width, wallThickness, border, height + border));
+
+    double nrOfGridsPerRow = 5.0;
+    double xOffset = width / nrOfGridsPerRow;
+    double yOffset = height / nrOfGridsPerRow;
+    for (int row = 0; row < nrOfGridsPerRow; row++) {
+        walls.push_back(ObjectUtil::createRectangle(walls.size(),
+                                                    width,
+                                                    wallThickness,
+                                                    border,
+                                                    yOffset * (1 + row) + border
+        ));
+    }
+    for (int column = 0; column < nrOfGridsPerRow; column++) {
+        walls.push_back(ObjectUtil::createRectangle(walls.size(),
+                                                    wallThickness,
+                                                    height,
+                                                    xOffset * (1 + column) + border,
+                                                    border
+        ));
+    }
 }
 
 void WindowHandler::draw(std::vector<RigidCircleBody> &bodies, double frameRate) {

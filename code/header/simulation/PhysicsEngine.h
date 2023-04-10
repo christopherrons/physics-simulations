@@ -8,6 +8,7 @@
 
 #include "SimulationConfig.h"
 #include "objects/RigidCircleBody.h"
+#include "../../src/simulation/Grid.h"
 
 class PhysicsEngine {
 public:
@@ -16,7 +17,11 @@ public:
     void updateState(std::vector<RigidCircleBody> &bodies);
 
 private:
-    void handleCollisions(RigidCircleBody &body);
+    void handleCollisions(std::vector<RigidCircleBody> &bodies);
+
+    void initGrid();
+
+    void handleBodyCollisions(std::vector<std::reference_wrapper<RigidCircleBody>> &bodies);
 
     void handleBodyCollisions(RigidCircleBody &bodyA, RigidCircleBody &bodyB);
 
@@ -29,6 +34,7 @@ private:
 
 private:
     SimulationConfig &simulationConfig;
+    std::vector<Grid> grids;
 };
 
 
