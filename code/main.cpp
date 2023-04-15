@@ -11,7 +11,7 @@
 #include <chrono>
 
 int main() {
-    std::string recordOption = "record";
+    std::string recordOption = "tmp";
     // std::cout << "\nType record if you wish to record else no: ";
     // std::cin >> recordOption;
 
