@@ -86,21 +86,22 @@ void PhysicsEngine::handleBodyCollisions(std::vector<std::reference_wrapper<Rigi
 
 
 void PhysicsEngine::handleBodyCollisions(RigidCircleBody &bodyA, RigidCircleBody &bodyB) {
-    double deltaTime = simulationConfig.getDeltaTime() / 10.0;
-    while (areColliding(bodyA, bodyB)) {
-        bodyA.updatePositionX(bodyA.getPositionX() + -bodyA.getVelocityX() * deltaTime);
-        bodyA.updatePositionY(bodyA.getPositionY() + -bodyA.getVelocityY() * deltaTime);
-
-        bodyB.updatePositionX(bodyB.getPositionX() + -bodyB.getVelocityX() * deltaTime);
-        bodyB.updatePositionY(bodyB.getPositionY() + -bodyB.getVelocityY() * deltaTime);
-    }
-
-    Vector2D velocityA = bodyA.getVelocityCopy();
     Vector2D positionA = bodyA.getPositionCopy();
-    double massA = bodyA.getMass();
+    Vector2D velocityA = bodyA.getVelocityCopy();
 
     Vector2D velocityB = bodyB.getVelocityCopy();
     Vector2D positionB = bodyB.getPositionCopy();
+
+    Vector2D directionVector = positionA.subtract(positionB);
+    double distance = directionVector.magnitude();
+    Vector2D directionVectorNormalized = directionVector.scalar(1 / distance);
+    double positionCorrection = (bodyA.getRadius() + bodyB.getRadius() - distance) / 2.0;
+    bodyA.updatePositionX(bodyA.getPositionX() + directionVectorNormalized.getX() * positionCorrection);
+    bodyB.updatePositionX(bodyB.getPositionX() + directionVectorNormalized.getX() * -positionCorrection);
+    bodyA.updatePositionY(bodyA.getPositionY() + directionVectorNormalized.getY() * positionCorrection);
+    bodyB.updatePositionY(bodyB.getPositionY() + directionVectorNormalized.getY() * -positionCorrection);
+
+    double massA = bodyA.getMass();
     double massB = bodyB.getMass();
 
     Vector2D velocityAfterCollisionA = velocityAfterCollision(velocityA, positionA, massA, velocityB, positionB,

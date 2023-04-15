@@ -8,7 +8,7 @@
 RigidCircleBody ObjectUtil::createCircle(int objectId, int xMinBoundary, int yMinBoundary, int xMaxBoundary,
                                          int yMaxBoundary, double maxVelocity) {
     sf::CircleShape circleShape;
-    double radius = MathUtils::getUniformRandomNumber(5, 10);
+    double radius = MathUtils::getUniformRandomNumber(2, 8);
     circleShape.setRadius(radius);
     circleShape.setOrigin(radius, radius);
 

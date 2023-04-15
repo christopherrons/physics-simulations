@@ -11,24 +11,24 @@
 #include <chrono>
 
 int main() {
-    std::string recordOption = "tmp";
+    std::string recordOption = "record";
     // std::cout << "\nType record if you wish to record else no: ";
     // std::cin >> recordOption;
 
-    int windowsWidth = 700;
+    int windowsWidth = 1900;
     int windowsHeight = 700;
     int border = 50;
     WindowHandler windowHandler(windowsWidth, windowsHeight, border);
 
     sf::Vector2i CurrentMousePosition;
-    SimulationConfig simulationConfig(200, 60, border, border, windowsWidth - border, windowsHeight - border, 75, 5);
+    SimulationConfig simulationConfig(1500, 60, border, border, windowsWidth - border, windowsHeight - border, 75, 10);
     PhysicsSceneHandler sceneHandler(simulationConfig);
 
     int iteration = 0;
     int screenShotNumber = 0;
     double aggregatedDeltaTime = 0.0;
     double deltaTime = 1.0 / 120;
-    double refreshTimeMin = 1.0 / 120;
+    double refreshTimeMin = 1.0 / 60;
     double refreshTime = 0.0;
 
     sceneHandler.updateScene();
