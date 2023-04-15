@@ -10,11 +10,11 @@ class Vector2D {
 public:
     explicit Vector2D(double x, double y);
 
-    double magnitude();
+    double magnitude() const;
 
-    double getX();
+    double getX() const;
 
-    double getY();
+    double getY() const;
 
     double dot(const Vector2D &otherVector) const;
 

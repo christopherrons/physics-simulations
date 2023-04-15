@@ -9,7 +9,7 @@
 class SimulationConfig {
 public:
     explicit SimulationConfig(int nrOfObjects, int frameRate, int xMinBoundary, int yMinBoundary, int xMaxBoundary,
-                              int yMaxBoundary, double maxVelocity);
+                              int yMaxBoundary, double maxVelocity, int nrOfGridsPerRowAndColumn);
 
     [[nodiscard]] int getNrOfObjects() const;
 
@@ -17,11 +17,11 @@ public:
 
     int getFrameRate() const;
 
-    double getDeltaTime() const;
+    [[nodiscard]]  double getDeltaTime() const;
 
-    double getMaxVelocity() const;
+    [[nodiscard]]  double getMaxVelocity() const;
 
-    void setFrameRate();
+    void setDeltaTime(double newDeltaTime);
 
     [[nodiscard]]  int getXMinBoundary() const;
 
@@ -30,6 +30,8 @@ public:
     [[nodiscard]]  int getXMaxBoundary() const;
 
     [[nodiscard]]  int getYMaxBoundary() const;
+
+    [[nodiscard]]  int getNrOfGridsPerRowAndColumn() const;
 
 private:
     int nrOfObjects;
@@ -40,6 +42,7 @@ private:
     int xMaxBoundary;
     int yMaxBoundary;
     double maxVelocity;
+    int nrOfGridsPerRowAndColumn;
 };
 
 

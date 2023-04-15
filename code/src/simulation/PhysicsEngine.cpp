@@ -12,8 +12,8 @@ PhysicsEngine::PhysicsEngine(SimulationConfig &simulationConfig) :
 }
 
 void PhysicsEngine::initGrid() {
-    double nrOfGridsPerRow = 5.0;
-    double nrOfGridsPerColumn = 5.0;
+    double nrOfGridsPerRow = simulationConfig.getNrOfGridsPerRowAndColumn();
+    double nrOfGridsPerColumn = simulationConfig.getNrOfGridsPerRowAndColumn();
 
     double xOffset = simulationConfig.getXMaxBoundary() / nrOfGridsPerColumn;
     double yOffset = simulationConfig.getYMaxBoundary() / nrOfGridsPerRow;
@@ -86,6 +86,15 @@ void PhysicsEngine::handleBodyCollisions(std::vector<std::reference_wrapper<Rigi
 
 
 void PhysicsEngine::handleBodyCollisions(RigidCircleBody &bodyA, RigidCircleBody &bodyB) {
+    double deltaTime = simulationConfig.getDeltaTime() / 10.0;
+    while (areColliding(bodyA, bodyB)) {
+        bodyA.updatePositionX(bodyA.getPositionX() + -bodyA.getVelocityX() * deltaTime);
+        bodyA.updatePositionY(bodyA.getPositionY() + -bodyA.getVelocityY() * deltaTime);
+
+        bodyB.updatePositionX(bodyB.getPositionX() + -bodyB.getVelocityX() * deltaTime);
+        bodyB.updatePositionY(bodyB.getPositionY() + -bodyB.getVelocityY() * deltaTime);
+    }
+
     Vector2D velocityA = bodyA.getVelocityCopy();
     Vector2D positionA = bodyA.getPositionCopy();
     double massA = bodyA.getMass();
@@ -104,15 +113,6 @@ void PhysicsEngine::handleBodyCollisions(RigidCircleBody &bodyA, RigidCircleBody
 
     bodyB.updateVelocityX(velocityAfterCollisionB.getX());
     bodyB.updateVelocityY(velocityAfterCollisionB.getY());
-
-    double deltaTime = simulationConfig.getDeltaTime() / 2.0;
-    while (areColliding(bodyA, bodyB)) {
-        bodyA.updatePositionX(bodyA.getPositionX() + bodyA.getVelocityX() * deltaTime);
-        bodyA.updatePositionY(bodyA.getPositionY() + bodyA.getVelocityY() * deltaTime);
-
-       // bodyB.updatePositionX(bodyB.getPositionX() + bodyB.getVelocityX() * deltaTime);
-        //bodyB.updatePositionY(bodyB.getPositionY() + bodyB.getVelocityY() * deltaTime);
-    }
 }
 
 void PhysicsEngine::handleWallCollision(RigidCircleBody &body) {

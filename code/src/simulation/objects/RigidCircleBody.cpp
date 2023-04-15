@@ -2,6 +2,7 @@
 // Created by christopher on 2023-04-09.
 //
 
+#include <iostream>
 #include "../../../header/simulation/objects/RigidCircleBody.h"
 #include "../../../header/utils/MathUtils.h"
 #include "../../../header/utils/ObjectUtil.h"

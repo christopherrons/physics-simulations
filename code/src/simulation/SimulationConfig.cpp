@@ -5,7 +5,7 @@
 #include "../../header/simulation/SimulationConfig.h"
 
 SimulationConfig::SimulationConfig(int nrOfObjects, int frameRate, int xMinBoundary, int yMinBoundary, int xMaxBoundary,
-                                   int yMaxBoundary, double maxVelocity) :
+                                   int yMaxBoundary, double maxVelocity, int nrOfGridsPerRowAndColumn) :
         nrOfObjects(nrOfObjects),
         frameRate(frameRate),
         deltaTime(1.0 / frameRate),
@@ -13,7 +13,8 @@ SimulationConfig::SimulationConfig(int nrOfObjects, int frameRate, int xMinBound
         yMinBoundary(yMinBoundary),
         xMaxBoundary(xMaxBoundary),
         yMaxBoundary(yMaxBoundary),
-        maxVelocity(maxVelocity) {
+        maxVelocity(maxVelocity),
+        nrOfGridsPerRowAndColumn(nrOfGridsPerRowAndColumn) {
 }
 
 int SimulationConfig::getNrOfObjects() const {
@@ -46,4 +47,12 @@ double SimulationConfig::getDeltaTime() const {
 
 double SimulationConfig::getMaxVelocity() const {
     return maxVelocity;
+}
+
+void SimulationConfig::setDeltaTime(double newDeltaTime) {
+    deltaTime = newDeltaTime;
+}
+
+int SimulationConfig::getNrOfGridsPerRowAndColumn() const {
+    return nrOfGridsPerRowAndColumn;
 }

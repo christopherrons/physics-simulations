@@ -8,38 +8,51 @@
 #include "header/gui/WindowHandler.h"
 #include "header/utils/ObjectUtil.h"
 #include "header/simulation//PhysicsSceneHandler.h"
+#include <chrono>
 
 int main() {
-    std::string recordOption = "temp";
-  //  std::cout << "\nType record if you wish to record else no: ";
-   // std::cin >> recordOption;
+    std::string recordOption = "tmp";
+    // std::cout << "\nType record if you wish to record else no: ";
+    // std::cin >> recordOption;
 
-    int windowsWidth = 600;
-    int windowsHeight = 600;
+    int windowsWidth = 700;
+    int windowsHeight = 700;
     int border = 50;
     WindowHandler windowHandler(windowsWidth, windowsHeight, border);
 
     sf::Vector2i CurrentMousePosition;
-    sf::Clock clock;
-    sf::Time timeSinceLastUpdate;
-    SimulationConfig simulationConfig(100, 60, border, border, windowsWidth - border, windowsHeight - border, 1);
+    SimulationConfig simulationConfig(200, 60, border, border, windowsWidth - border, windowsHeight - border, 75, 5);
     PhysicsSceneHandler sceneHandler(simulationConfig);
 
     int iteration = 0;
-    double updatesPerSecond = 1.0 / simulationConfig.getFrameRate();
+    int screenShotNumber = 0;
+    double aggregatedDeltaTime = 0.0;
+    double deltaTime = 1.0 / 120;
+    double refreshTimeMin = 1.0 / 120;
+    double refreshTime = 0.0;
+
+    sceneHandler.updateScene();
     while (true) {
         sf::Event event{};
-        timeSinceLastUpdate += clock.restart();
-        sceneHandler.updateScene();
-        if (timeSinceLastUpdate.asSeconds() > updatesPerSecond) {
-            windowHandler.draw(sceneHandler.getBodies(), timeSinceLastUpdate.asSeconds());
+        aggregatedDeltaTime += deltaTime;
+        simulationConfig.setDeltaTime(deltaTime);
+        refreshTime += deltaTime;
 
+        auto start = std::chrono::high_resolution_clock::now();
+        sceneHandler.updateScene();
+
+        if (refreshTime > refreshTimeMin) {
+            windowHandler.draw(sceneHandler.getBodies(), aggregatedDeltaTime / (iteration + 1));
+            auto end = std::chrono::high_resolution_clock::now();
+            deltaTime = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count() / 1000000.0;
+            refreshTime = 0;
             if (recordOption == "record") {
-                windowHandler.takeScreenShot(iteration++);
+                windowHandler.takeScreenShot(screenShotNumber++);
             }
 
-            timeSinceLastUpdate = sf::Time::Zero;
-
+        } else {
+            auto end = std::chrono::high_resolution_clock::now();
+            deltaTime = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count() / 1000000.0;
         }
 
         while (windowHandler.window.pollEvent(event)) {
@@ -52,6 +65,8 @@ int main() {
                 int a = 1;
             }
         }
+
+        iteration++;
     }
 
     return 0;

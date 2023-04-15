@@ -44,7 +44,6 @@ private:
     std::vector<RigidRectangleBody> walls;
     sf::Font textFont;
     sf::Text frameRateText;
-    sf::Text nrOfParticlesText;
 };
 
 

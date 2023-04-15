@@ -11,7 +11,6 @@ WindowHandler::WindowHandler(int width, int height, int border)
         : window(sf::VideoMode(width, height), "Physics Simulation", sf::Style::Default),
           textFont(sf::Font()),
           frameRateText(sf::Text("FPS: ", textFont)),
-          nrOfParticlesText(sf::Text("| # Particles: ", textFont)),
           backgroundSprite(sf::Sprite()) {
 
     frameRateText.setOutlineThickness(1.f);
@@ -19,12 +18,6 @@ WindowHandler::WindowHandler(int width, int height, int border)
     frameRateText.setCharacterSize(20);
     frameRateText.setPosition(15.f, 15.f);
     frameRateText.setStyle(sf::Text::Style::Bold);
-
-    nrOfParticlesText.setOutlineThickness(1.f);
-    nrOfParticlesText.setFillColor(sf::Color::White);
-    nrOfParticlesText.setCharacterSize(20);
-    nrOfParticlesText.setPosition(100.f, 15.f);
-    nrOfParticlesText.setStyle(sf::Text::Style::Bold);
 
     initWalls(width, height, border);
     loadFont();
@@ -39,35 +32,13 @@ void WindowHandler::initWalls(float widthNoBorder, float heightNoBorder, int bor
     walls.push_back(ObjectUtil::createRectangle(walls.size(), wallThickness, height, width + border, border));
     walls.push_back(ObjectUtil::createRectangle(walls.size(), width, wallThickness, border, border));
     walls.push_back(ObjectUtil::createRectangle(walls.size(), width, wallThickness, border, height + border));
-
-    double nrOfGridsPerRow = 5.0;
-    double xOffset = width / nrOfGridsPerRow;
-    double yOffset = height / nrOfGridsPerRow;
-    for (int row = 0; row < nrOfGridsPerRow; row++) {
-        walls.push_back(ObjectUtil::createRectangle(walls.size(),
-                                                    width,
-                                                    wallThickness,
-                                                    border,
-                                                    yOffset * (1 + row) + border
-        ));
-    }
-    for (int column = 0; column < nrOfGridsPerRow; column++) {
-        walls.push_back(ObjectUtil::createRectangle(walls.size(),
-                                                    wallThickness,
-                                                    height,
-                                                    xOffset * (1 + column) + border,
-                                                    border
-        ));
-    }
 }
 
 void WindowHandler::draw(std::vector<RigidCircleBody> &bodies, double frameRate) {
     this->window.clear();
     this->drawBackground();
-    this->frameRateText.setString("FPS: " + std::to_string((int) round(1.0 / frameRate)));
+    this->frameRateText.setString("FPS: " + std::to_string((int) round(1.0 / frameRate)) + " | # Particles: " + std::to_string(bodies.size()));
     this->window.draw(this->frameRateText);
-    this->nrOfParticlesText.setString("| # Particles: " + std::to_string(bodies.size()));
-    this->window.draw(this->nrOfParticlesText);
 
     for (auto &wall: walls) {
         this->window.draw(wall.getShape());
@@ -107,7 +78,7 @@ void WindowHandler::takeScreenShot(int iteration) {
     texture.create(window.getSize().x, window.getSize().y);
     texture.update(window);
     if (texture.copyToImage().saveToFile("../recording/images/screenshot_" + std::to_string(iteration) + ".png")) {
-        std::cout << "Screenshot saved" << std::endl;
+      //  std::cout << "Screenshot saved" << std::endl;
     } else {
         std::cout << "NOT SAVED" << std::endl;
     }

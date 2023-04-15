@@ -10,15 +10,15 @@ Vector2D::Vector2D(double x, double y) :
         y(y) {
 }
 
-double Vector2D::magnitude() {
+double Vector2D::magnitude() const {
     return sqrt(pow(x, 2) + pow(y, 2));
 }
 
-double Vector2D::getX() {
+double Vector2D::getX() const {
     return x;
 }
 
-double Vector2D::getY() {
+double Vector2D::getY() const {
     return y;
 }
 
