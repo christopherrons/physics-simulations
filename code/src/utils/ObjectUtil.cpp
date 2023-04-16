@@ -8,15 +8,15 @@
 RigidCircleBody ObjectUtil::createCircle(int objectId, int xMinBoundary, int yMinBoundary, int xMaxBoundary,
                                          int yMaxBoundary, double maxVelocity) {
     sf::CircleShape circleShape;
-    double radius = MathUtils::getUniformRandomNumber(2, 8);
+    double radius = std::round(MathUtils::getUniformRandomNumber(2, 8) * 1000.0) / 1000.0;
     circleShape.setRadius(radius);
     circleShape.setOrigin(radius, radius);
 
     Vector2D initialAcceleration(0, 0);
-    Vector2D initialVelocity(MathUtils::getUniformRandomNumber(-maxVelocity, maxVelocity),
-                             MathUtils::getUniformRandomNumber(-maxVelocity, maxVelocity));
-    Vector2D initialPosition(MathUtils::getUniformRandomNumber(xMinBoundary + radius, xMaxBoundary - radius * 2),
-                             MathUtils::getUniformRandomNumber(yMinBoundary + radius, yMaxBoundary - radius * 2));
+    Vector2D initialVelocity(MathUtils::getNormalRandomNumber(0, maxVelocity / 2),
+                             MathUtils::getNormalRandomNumber(0, maxVelocity / 2));
+    Vector2D initialPosition(MathUtils::getUniformRandomNumber(xMinBoundary + radius, xMaxBoundary - radius),
+                             MathUtils::getUniformRandomNumber(yMinBoundary + radius, yMaxBoundary - radius));
 
     return RigidCircleBody(objectId, 1.0, maxVelocity, initialAcceleration, initialVelocity, initialPosition,
                            circleShape);
@@ -41,7 +41,7 @@ sf::Color ObjectUtil::getColorInterpolated(double velocityAbsolute, double maxVe
     double mediumVelocity = 0.60;
     double fastVelocity = 0.90;
 
-    double velocity = velocityAbsolute / maxVelocity;
+    double velocity = velocityAbsolute / sqrt(maxVelocity * maxVelocity + maxVelocity * maxVelocity);
     if (velocity < slowVelocity) {
         sf::Uint8 red = MathUtils::linearInterpolation(velocity, 0.0, slowVelocity, 0, 66);
         sf::Uint8 green = MathUtils::linearInterpolation(velocity, 0.0, slowVelocity, 0, 107);
@@ -56,7 +56,7 @@ sf::Color ObjectUtil::getColorInterpolated(double velocityAbsolute, double maxVe
 
     } else if (velocity >= mediumVelocity && velocity < fastVelocity) {
         sf::Uint8 red = MathUtils::linearInterpolation(velocity, mediumVelocity, fastVelocity, 200, 255);
-        sf::Uint8 green = MathUtils::linearInterpolation(velocity, mediumVelocity, fastVelocity, 200, 170);
+        sf::Uint8 green = MathUtils::linearInterpolation(velocity, mediumVelocity, fastVelocity, 200, 255);
         sf::Uint8 blue = MathUtils::linearInterpolation(velocity, mediumVelocity, fastVelocity, 230, 255);
         return {red, green, blue, alpha};
     }

@@ -23,7 +23,9 @@ private:
 
     void handleBodyCollisions(std::vector<std::reference_wrapper<RigidCircleBody>> &bodies);
 
-    void handleBodyCollisions(RigidCircleBody &bodyA, RigidCircleBody &bodyB);
+    void updatePostCollisionVelocity(RigidCircleBody &bodyA, RigidCircleBody &bodyB);
+
+    void disIntersectCollidingBodies(RigidCircleBody &bodyA, RigidCircleBody &bodyB);
 
     void handleWallCollision(RigidCircleBody &body);
 

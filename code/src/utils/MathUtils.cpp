@@ -12,6 +12,13 @@ double MathUtils::getUniformRandomNumber(const double min, const double max) {
     return distribution(generator);
 }
 
+double MathUtils::getNormalRandomNumber(const double mean, const double std) {
+    std::random_device randomDevice;
+    std::default_random_engine generator(randomDevice());
+    std::normal_distribution<double> distribution(mean, std);
+    return distribution(generator);
+}
+
 double MathUtils::calculateAreaOfCircle(double radius) {
     return 2 * M_PI * radius * radius;
 }

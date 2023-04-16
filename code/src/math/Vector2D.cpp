@@ -22,12 +22,12 @@ double Vector2D::getY() const {
     return y;
 }
 
-void Vector2D::setX(double x) {
-    this->x = x;
+void Vector2D::setX(double newX) {
+    x = newX;
 }
 
-void Vector2D::setY(double y) {
-    this->y = y;
+void Vector2D::setY(double newY) {
+    y = newY;
 }
 
 Vector2D Vector2D::subtract(const Vector2D &otherVector) const {

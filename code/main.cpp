@@ -16,12 +16,12 @@ int main() {
     // std::cin >> recordOption;
 
     int windowsWidth = 1900;
-    int windowsHeight = 700;
+    int windowsHeight = 950;
     int border = 50;
     WindowHandler windowHandler(windowsWidth, windowsHeight, border);
 
     sf::Vector2i CurrentMousePosition;
-    SimulationConfig simulationConfig(1500, 60, border, border, windowsWidth - border, windowsHeight - border, 75, 10);
+    SimulationConfig simulationConfig(1500, 60, border, border, windowsWidth - border, windowsHeight - border, 150, 10);
     PhysicsSceneHandler sceneHandler(simulationConfig);
 
     int iteration = 0;

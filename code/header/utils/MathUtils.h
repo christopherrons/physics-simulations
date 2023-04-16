@@ -11,6 +11,8 @@ class MathUtils {
 public:
     static double getUniformRandomNumber(double min, double max);
 
+    static double getNormalRandomNumber(double mean, double std);
+
     static double calculateAreaOfCircle(double radius);
 
     static double calculateVolumeOfSphere(double radius);

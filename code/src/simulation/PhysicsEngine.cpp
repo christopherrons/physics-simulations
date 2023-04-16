@@ -41,6 +41,7 @@ void PhysicsEngine::updateState(std::vector<RigidCircleBody> &bodies) {
 
         body.updateVelocityX(updatedVelocityX);
         body.updateVelocityY(updatedVelocityY);
+
         body.updatePositionX(updatedPositionX);
         body.updatePositionY(updatedPositionY);
     }
@@ -79,27 +80,37 @@ void PhysicsEngine::handleBodyCollisions(std::vector<std::reference_wrapper<Rigi
             if (bodyA.get().getObjectId() == bodyB.get().getObjectId() || !areColliding(bodyA, bodyB)) {
                 continue;
             }
-            handleBodyCollisions(bodyA, bodyB);
+            disIntersectCollidingBodies(bodyA, bodyB);
+            updatePostCollisionVelocity(bodyA, bodyB);
         }
     }
 }
 
+void PhysicsEngine::disIntersectCollidingBodies(RigidCircleBody &bodyA, RigidCircleBody &bodyB) {
+    Vector2D positionA = bodyA.getPositionCopy();
+    Vector2D positionB = bodyB.getPositionCopy();
 
-void PhysicsEngine::handleBodyCollisions(RigidCircleBody &bodyA, RigidCircleBody &bodyB) {
+    Vector2D directionVectorAB = positionB.subtract(positionA);
+    Vector2D directionVectorBA = positionA.subtract(positionB);
+    double distance = directionVectorAB.magnitude();
+
+    Vector2D directionVectorNormalizedAB = directionVectorAB.scalar(1 / distance);
+    Vector2D directionVectorNormalizedBA = directionVectorBA.scalar(1 / distance);
+    double positionCorrection = (bodyA.getRadius() + bodyB.getRadius() - distance) / 2.0;
+
+    bodyA.updatePositionX(bodyA.getPositionX() + directionVectorNormalizedAB.getX() * -positionCorrection);
+    bodyA.updatePositionY(bodyA.getPositionY() + directionVectorNormalizedAB.getY() * -positionCorrection);
+
+    bodyB.updatePositionX(bodyB.getPositionX() + directionVectorNormalizedBA.getX() * -positionCorrection);
+    bodyB.updatePositionY(bodyB.getPositionY() + directionVectorNormalizedBA.getY() * -positionCorrection);
+}
+
+void PhysicsEngine::updatePostCollisionVelocity(RigidCircleBody &bodyA, RigidCircleBody &bodyB) {
     Vector2D positionA = bodyA.getPositionCopy();
     Vector2D velocityA = bodyA.getVelocityCopy();
 
     Vector2D velocityB = bodyB.getVelocityCopy();
     Vector2D positionB = bodyB.getPositionCopy();
-
-    Vector2D directionVector = positionA.subtract(positionB);
-    double distance = directionVector.magnitude();
-    Vector2D directionVectorNormalized = directionVector.scalar(1 / distance);
-    double positionCorrection = (bodyA.getRadius() + bodyB.getRadius() - distance) / 2.0;
-    bodyA.updatePositionX(bodyA.getPositionX() + directionVectorNormalized.getX() * positionCorrection);
-    bodyB.updatePositionX(bodyB.getPositionX() + directionVectorNormalized.getX() * -positionCorrection);
-    bodyA.updatePositionY(bodyA.getPositionY() + directionVectorNormalized.getY() * positionCorrection);
-    bodyB.updatePositionY(bodyB.getPositionY() + directionVectorNormalized.getY() * -positionCorrection);
 
     double massA = bodyA.getMass();
     double massB = bodyB.getMass();
@@ -155,17 +166,18 @@ bool PhysicsEngine::areColliding(RigidCircleBody &circleA, RigidCircleBody &circ
             pow(circleA.getPositionX() - circleB.getPositionX(), 2) +
             pow(circleA.getPositionY() - circleB.getPositionY(), 2)
     );
-    return distance <= circleA.getRadius() + circleB.getRadius();
+    return distance + 0.0001 <= circleA.getRadius() + circleB.getRadius();
 }
 
 Vector2D PhysicsEngine::velocityAfterCollision(Vector2D &velocityOne, Vector2D &positionOne, double massOne,
                                                Vector2D &velocityTwo, Vector2D &positionTwo, double massTwo) {
-    Vector2D positionDifference = positionOne.subtract(positionTwo);
-    Vector2D velocityDifference = velocityOne.subtract(velocityTwo);
+    Vector2D direction = positionOne.subtract(positionTwo);
+    Vector2D velocityDirection = velocityOne.subtract(velocityTwo);
     double massRatio = (2 * massTwo) / (massOne + massTwo);
     double scalar = massRatio *
-                    velocityDifference.dot(positionDifference) /
-                    positionDifference.dot(positionDifference);
-    return velocityOne.subtract(positionDifference.scalar(scalar));
+                    velocityDirection.dot(direction) /
+                    direction.dot(direction);
+    return velocityOne.subtract(direction.scalar(scalar));
 }
+
 
